@@ -1,6 +1,6 @@
 // Package human is a convenience wrapper for logging human-readable messages of various
-// levels to the terminal. Much of this code has been shamelessly stolen from
-// https://github.com/helm/helm/blob/master/log/log.go.
+// levels to the terminal. Much of this code has been taken from
+// https://github.com/helm/helm/blob/d87ce93e1e287ece84d940dbfe09b0de493d9953/pkg/kube/log.go
 //
 // Thank you Helm team!
 package human
@@ -40,21 +40,6 @@ func Check(err error, successFmt string, successArgs ...interface{}) error {
 	}
 	Msg(successFmt, successArgs...)
 	return nil
-}
-
-// Die prints an error and then call os.Exit(1).
-func Die(format string, v ...interface{}) {
-	Err(format, v...)
-	if IsDebugging {
-		panic(fmt.Sprintf(format, v...))
-	}
-	os.Exit(1)
-}
-
-// CleanExit prints a message and then exits with 0.
-func CleanExit(format string, v ...interface{}) {
-	Info(format, v...)
-	os.Exit(0)
 }
 
 // Err prints an error message. It does not cause an exit.
